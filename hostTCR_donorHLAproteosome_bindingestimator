@@ -1,0 +1,68 @@
+
+import pandas as pd
+from Bio.Seq import Seq
+
+def proteasome_cleavage(hla_sequence, min_length=8, max_length=15):
+    """
+    Generate proteasomal cleavage products from an HLA sequence.
+
+    Parameters:
+        hla_sequence (str): The HLA protein sequence.
+        min_length (int): Minimum peptide length.
+        max_length (int): Maximum peptide length.
+
+    Returns:
+        List of cleavage products (peptides).
+    """
+    peptides = []
+    sequence = Seq(hla_sequence)
+    for start in range(len(sequence)):
+        for length in range(min_length, max_length + 1):
+            if start + length <= len(sequence):
+                peptides.append(str(sequence[start:start + length]))
+    return peptides
+
+def predict_hla_binding(peptides, hla_alleles):
+    """Predict which peptides bind to given HLA alleles."""
+    # Mock prediction: Assume all peptides bind to the first HLA allele
+    binding_predictions = []
+    for peptide in peptides:
+        for allele in hla_alleles:
+            binding_predictions.append({"Peptide": peptide, "HLA_Allele": allele, "Affinity": "High"})
+    return pd.DataFrame(binding_predictions)
+
+def predict_tcr_activation(epitopes):
+    """Predict which TCRs are activated by given epitopes."""
+    # Mock activation data
+    tcr_data = []
+    for epitope in epitopes:
+        tcr_data.append({"Epitope": epitope, "TCR": f"TCR_{epitope[:5]}", "Activation_Potential": "High"})
+    return pd.DataFrame(tcr_data)
+
+def main():
+    # Input HLA sequence
+    hla_sequence = input("Enter HLA sequence: ")
+
+    # Generate proteasome cleavage products
+    cleavage_products = proteasome_cleavage(hla_sequence)
+    print("\nProteasome Cleavage Products:")
+    print(cleavage_products)
+
+    # Input HLA alleles
+    hla_alleles = input("Enter HLA alleles (comma-separated, e.g., HLA-A*02:01,HLA-B*07:02,HLA-DRB1*15:01): ").split(',')
+
+    # Predict HLA binding
+    binding_predictions = predict_hla_binding(cleavage_products, hla_alleles)
+    print("\nHLA Binding Predictions:")
+    print(binding_predictions)
+
+    # Identify epitopes (simplified as all peptides predicted to bind)
+    epitopes = binding_predictions['Peptide'].unique()
+
+    # Predict TCR activation
+    tcr_predictions = predict_tcr_activation(epitopes)
+    print("\nTCR Activation Predictions:")
+    print(tcr_predictions)
+
+if __name__ == "__main__":
+    main()
