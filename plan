@@ -1,9 +1,14 @@
 This program consists of the following components:
 
-1. Proteosomal Cleavage Program
-  
+1. Proteasomal Cleavage Program
+  chops donor HLA into proteasomal cleavage products
+
+
 
 2. Host HLA Binding and TCR Activation Predictor
+
+Determines what hHLA will bind to and which TCR's will be activated
+
 
 -Are we using NetMHC, NetMHCpan (neural nets) or MHCFlurry (ensemble machine learning)? Maybe we should implement those
 
@@ -12,5 +17,6 @@ This program consists of the following components:
    We need to know if TCR will be activated by these dHLA proteasomes
 
    - Maybe cross reference hHLA for proteasomes that are already deleted during VDL recombination in host
+
 
 3. Retreive sequences for TCR that are activated
