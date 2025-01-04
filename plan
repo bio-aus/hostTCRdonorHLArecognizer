@@ -2,7 +2,7 @@ This program consists of the following components:
 
 1. Proteasomal Cleavage Program
   chops donor HLA into proteasomal cleavage products
-
+-Are we using NetChop 3.1?
 
 
 2. Host HLA Binding and TCR Activation Predictor
